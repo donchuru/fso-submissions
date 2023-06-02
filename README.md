@@ -16,3 +16,6 @@ part2
 </pre>
 
 Put the whole react repository of the project to each folder except the folder <i>node_modules</i>
+
+
+* The actual submissions(for the exercises) for each part are named App.js in the respective folder
