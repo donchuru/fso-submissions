@@ -1,5 +1,4 @@
 /*
-
 REACHED BEGINNING OF 1.8
 
 ALWAYS remember to return from your components
@@ -13,6 +12,30 @@ const Button = ({ handleClick, text }) => {
     <button onClick={handleClick}> 
       { text }
     </button>
+  )
+}
+
+const StatisticLine = ({text, value}) => {
+  return (
+    <tr>
+      <td> {text} </td>
+      <td> {value} </td>
+    </tr>
+  )
+
+}
+
+const Statistics = ({good, neutral, bad, total, average, upadatePositive}) => {
+  return (
+    <>
+      <h2> statistics </h2>
+      <StatisticLine text="good" value={good} />
+      <StatisticLine text="neutral" value={neutral} />
+      <StatisticLine text="bad" value={bad} />
+      <StatisticLine text="total" value={total} />
+      <StatisticLine text="average" value={average} />
+      <p> positive {upadatePositive()} </p>
+    </>
   )
 }
 
@@ -60,25 +83,30 @@ const App = () => {
     return ((good/total) * 100)
   }
 
-  return (
-    <>
-        <h1> Give Feedback </h1>
-        <Button handleClick={goodClick} text='good'/>
-        <Button handleClick={neutralClick} text='neutral'/>
-        <Button handleClick={badClick} text='bad'/>
+  if (total === 0){
+    return (
+      <>
+          <h1> Give Feedback </h1>
+          <Button handleClick={goodClick} text='good'/>
+          <Button handleClick={neutralClick} text='neutral'/>
+          <Button handleClick={badClick} text='bad'/>
+  
+          <p> No Feedback Given </p>
+      </>
+    )
+  } else {
+    return (
+      <>
+          <h1> Give Feedback </h1>
+          <Button handleClick={goodClick} text='good'/>
+          <Button handleClick={neutralClick} text='neutral'/>
+          <Button handleClick={badClick} text='bad'/>
+  
+          <Statistics good={good} neutral={neutral} bad={bad} total={total} average={average} upadatePositive={upadatePositive} />
+      </>
+    )
 
-        <h2> statistics </h2>
-        <p> good { good } </p>
-        <p> neutral { neutral }</p>
-        <p> bad { bad }</p>
-
-        <p> total {total} </p>
-
-        <p> average {average}</p>
-
-        <p> positive {upadatePositive()} </p>
-    </>
-  )
+  }
 }
 
 export default App
